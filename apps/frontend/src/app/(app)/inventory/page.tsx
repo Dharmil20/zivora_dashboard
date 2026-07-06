@@ -271,7 +271,7 @@ export default function InventoryPage() {
           <div>
             <div className="toolbar">
               <div className="toolbar-left">
-                <div className="search-box" style={{ width: 300 }}>
+                <div className="search-box" style={{ maxWidth: 300, width: '100%' }}>
                   <span className="material-icons-round">search</span>
                   <input
                     className="form-input"
@@ -376,7 +376,7 @@ export default function InventoryPage() {
           <div>
             <div className="toolbar">
               <div className="toolbar-left">
-                <div className="search-box" style={{ width: 300 }}>
+                <div className="search-box" style={{ maxWidth: 300, width: '100%' }}>
                   <span className="material-icons-round">search</span>
                   <input
                     className="form-input"

@@ -220,7 +220,7 @@ export default function SettingsPage() {
                   />
                 </div>
               </div>
-              <div className="form-row-3" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 14 }}>
+              <div className="form-row-3">
                 <div className="form-group">
                   <label className="form-label">City</label>
                   <input

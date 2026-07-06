@@ -189,7 +189,7 @@ export default function CustomersPage() {
     <div className="animate-in" id="customers-page">
       <div className="toolbar">
         <div className="toolbar-left">
-          <div className="search-box" style={{ width: 300 }}>
+          <div className="search-box" style={{ maxWidth: 300, width: '100%' }}>
             <span className="material-icons-round">search</span>
             <input
               className="form-input"
@@ -207,7 +207,7 @@ export default function CustomersPage() {
       </div>
 
       {/* Stats row */}
-      <div className="stats-grid mb-md" style={{ gridTemplateColumns: 'repeat(3, 1fr)', marginTop: 14 }}>
+      <div className="stats-grid mb-md" style={{ marginTop: 14 }}>
         <div className="stat-card">
           <div className="stat-card-icon sapphire"><span className="material-icons-round">groups</span></div>
           <div className="stat-card-label">Total Customers</div>

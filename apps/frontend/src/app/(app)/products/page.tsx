@@ -312,7 +312,7 @@ export default function ProductsPage() {
           <div>
             <div className="toolbar">
               <div className="toolbar-left">
-                <div className="search-box" style={{ width: 300 }}>
+                <div className="search-box" style={{ maxWidth: 300, width: '100%' }}>
                   <span className="material-icons-round">search</span>
                   <input
                     className="form-input"
@@ -323,7 +323,7 @@ export default function ProductsPage() {
                 </div>
                 <select
                   className="form-select"
-                  style={{ width: 180 }}
+                  style={{ maxWidth: 180, width: '100%' }}
                   value={categoryFilter}
                   onChange={(e) => setCategoryFilter(e.target.value)}
                 >
@@ -418,7 +418,7 @@ export default function ProductsPage() {
           <div>
             <div className="toolbar">
               <div className="toolbar-left">
-                <div className="search-box" style={{ width: 300 }}>
+                <div className="search-box" style={{ maxWidth: 300, width: '100%' }}>
                   <span className="material-icons-round">search</span>
                   <input
                     className="form-input"
@@ -841,7 +841,7 @@ function VariantManager({ product, categories, db, showToast, openModal, closeMo
         </div>
         <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: 14 }}>
           <div className="text-muted" style={{ fontSize: '0.75rem', marginBottom: 10 }}>Optional attributes (for extra detail)</div>
-          <div className="form-row-3" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 14 }}>
+          <div className="form-row-3">
             <div className="form-group">
               <label className="form-label">Color</label>
               <input

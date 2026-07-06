@@ -34,6 +34,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div id="app">
+      <div
+        className={`sidebar-overlay ${sidebarOpen ? 'show' : ''}`}
+        onClick={() => setSidebarOpen(false)}
+      />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="main-content">
         <Header onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />

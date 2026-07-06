@@ -211,7 +211,26 @@ export default function BillsPage() {
 
   return (
     <div className="animate-in" id="bills-page">
-      <div className="stats-grid mb-md" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+      <div className="toolbar">
+        <div className="toolbar-left">
+          <div className="search-box" style={{ maxWidth: 300, width: '100%' }}>
+            <span className="material-icons-round">search</span>
+            <input
+              className="form-input"
+              placeholder="Search by bill #, customer..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="toolbar-right">
+          <Link href="/billing" className="btn btn-primary" style={{ textDecoration: 'none' }}>
+            <span className="material-icons-round">add</span> New Bill
+          </Link>
+        </div>
+      </div>
+
+      <div className="stats-grid mb-md">
         <div className="stat-card">
           <div className="stat-card-icon gold"><span className="material-icons-round">receipt_long</span></div>
           <div className="stat-card-label">Total Bills</div>
@@ -226,25 +245,6 @@ export default function BillsPage() {
           <div className="stat-card-icon sapphire"><span className="material-icons-round">trending_up</span></div>
           <div className="stat-card-label">Avg. Bill Value</div>
           <div className="stat-card-value">{formatCurrency(avgBillValue)}</div>
-        </div>
-      </div>
-
-      <div className="toolbar">
-        <div className="toolbar-left">
-          <div className="search-box" style={{ width: 300 }}>
-            <span className="material-icons-round">search</span>
-            <input
-              className="form-input"
-              placeholder="Search by bill #, customer..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className="toolbar-right">
-          <Link href="/billing" className="btn btn-primary" style={{ textDecoration: 'none' }}>
-            <span className="material-icons-round">add</span> New Bill
-          </Link>
         </div>
       </div>
 
