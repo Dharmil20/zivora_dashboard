@@ -30,4 +30,15 @@ export const settingController = {
       sendError(res, error as Error, 400);
     }
   },
+
+  async reset(_req: Request, res: Response): Promise<void> {
+    try {
+      logger.warn("Resetting all database data");
+      await settingService.reset();
+      sendSuccess(res, null, "All database data reset successfully");
+    } catch (error) {
+      logger.error(error, "Failed to reset database data");
+      sendError(res, error as Error);
+    }
+  },
 };

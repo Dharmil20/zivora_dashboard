@@ -9,3 +9,4 @@ export const settingRouter = Router();
 
 settingRouter.get("/", settingController.get);
 settingRouter.put("/", settingController.update);
+settingRouter.post("/reset", settingController.reset);

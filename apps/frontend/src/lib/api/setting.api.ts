@@ -15,4 +15,9 @@ export const settingApi = {
   update(data: UpdateShopSettingDto): Promise<ShopSetting> {
     return apiClient.put<ShopSetting>("/settings", data);
   },
+
+  /** POST /api/settings/reset */
+  reset(): Promise<void> {
+    return apiClient.post<void>("/settings/reset", {});
+  },
 };

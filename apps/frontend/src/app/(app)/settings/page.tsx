@@ -6,6 +6,7 @@ import { useDb } from '@/context/DbProvider';
 import { useToast } from '@/context/ToastProvider';
 import { useModal } from '@/context/ModalProvider';
 import { escapeHtml } from '@/lib/helpers';
+import { seedDemoData } from '@/lib/db/seed';
 
 interface ShopSettings {
   shopName: string;
@@ -140,11 +141,42 @@ export default function SettingsPage() {
     }
   };
 
+  const handleSeedDemoData = async () => {
+    const ok = await confirm('This will populate the database with sample products, categories, and bills. Continue?', 'Seed Demo Data');
+    if (ok) {
+      try {
+        await seedDemoData();
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('zivora_has_seeded', 'true');
+        }
+        showToast('Demo data seeded successfully! Refreshing...', 'success');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      } catch (err: any) {
+        showToast('Failed to seed data: ' + err.message, 'error');
+      }
+    }
+  };
+
   const handleResetData = async () => {
     const ok = await confirm('This will permanently delete ALL data including products, bills, and customers. This cannot be undone. Are you sure?', '⚠️ Reset All Data');
     if (ok) {
+      try {
+        const hasApiUrl = !!process.env.NEXT_PUBLIC_API_URL;
+        if (hasApiUrl) {
+          await db.resetBackend();
+        }
+      } catch (err: any) {
+        showToast('Backend database reset failed: ' + err.message, 'error');
+        return;
+      }
+
       // Delete database
       indexedDB.deleteDatabase('Zivora');
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('zivora_has_seeded');
+      }
       showToast('All data reset. Refreshing...', 'warning');
       setTimeout(() => {
         window.location.reload();
@@ -321,6 +353,15 @@ export default function SettingsPage() {
                   style={{ display: 'none' }}
                   onChange={handleImportData}
                 />
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: 14, background: 'var(--bg-surface)', borderRadius: 'var(--radius-md)' }}>
+                <span className="material-icons-round" style={{ color: 'var(--sapphire)' }}>science</span>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 600, fontSize: '0.88rem' }}>Seed Demo Data</div>
+                  <div className="text-muted" style={{ fontSize: '0.75rem' }}>Populate database with sample products, categories, and sales</div>
+                </div>
+                <button className="btn btn-secondary btn-sm" onClick={handleSeedDemoData}>Seed</button>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: 14, background: 'rgba(231,76,60,0.06)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(231,76,60,0.15)' }}>

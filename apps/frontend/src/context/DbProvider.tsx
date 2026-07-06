@@ -19,7 +19,15 @@ export function DbProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     (async () => {
-      await seedDemoData();
+      const hasApiUrl = !!process.env.NEXT_PUBLIC_API_URL;
+      const hasSeeded = typeof window !== 'undefined' && localStorage.getItem('zivora_has_seeded') === 'true';
+
+      if (!hasApiUrl && !hasSeeded) {
+        await seedDemoData();
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('zivora_has_seeded', 'true');
+        }
+      }
       setReady(true);
     })();
   }, []);

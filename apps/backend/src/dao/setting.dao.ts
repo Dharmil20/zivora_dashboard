@@ -4,7 +4,11 @@
 
 import { eq } from "drizzle-orm";
 import { db } from "../db/index.js";
-import { shopSettings } from "../db/schema/index.js";
+import { 
+  shopSettings, billItems, billPayments, bills, orders,
+  inventoryTransactions, productVariants, products,
+  categories, customers, purchaseInvoices, suppliers, users
+} from "../db/schema/index.js";
 
 export type InsertShopSetting = typeof shopSettings.$inferInsert;
 export type SelectShopSetting = typeof shopSettings.$inferSelect;
@@ -39,5 +43,25 @@ export const settingDao = {
       .returning();
 
     return updated!;
+  },
+
+  /** Purge all data from the database. */
+  async reset(): Promise<void> {
+    await db.transaction(async (tx) => {
+      // Delete in order to satisfy foreign key constraints
+      await tx.delete(billItems);
+      await tx.delete(billPayments);
+      await tx.delete(bills);
+      await tx.delete(orders);
+      await tx.delete(inventoryTransactions);
+      await tx.delete(productVariants);
+      await tx.delete(products);
+      await tx.delete(categories);
+      await tx.delete(customers);
+      await tx.delete(purchaseInvoices);
+      await tx.delete(suppliers);
+      await tx.delete(shopSettings);
+      await tx.delete(users);
+    });
   },
 };

@@ -801,6 +801,10 @@ export const db = {
     }
   },
 
+  async resetBackend() {
+    await settingApi.reset();
+  },
+
   generateId,
   generateBillNumber,
   generateSKU,

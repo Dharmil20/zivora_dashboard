@@ -35,4 +35,8 @@ export const settingService = {
 
     return settingDao.update(payload);
   },
+
+  async reset() {
+    return settingDao.reset();
+  },
 };
