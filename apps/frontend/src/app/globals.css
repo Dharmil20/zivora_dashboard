@@ -1524,6 +1524,32 @@ input, select, textarea, button {
 
 /* --- Tablet portrait & mobile (≤768px) --- */
 @media (max-width: 768px) {
+  /* Layout reset to enable natural page-level scrolling on mobile */
+  html, body {
+    overflow: auto !important;
+    height: auto !important;
+  }
+  #app {
+    display: block;
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible !important;
+  }
+  .main-content {
+    display: block;
+    height: auto !important;
+    min-height: calc(100vh - var(--header-height));
+    overflow: visible !important;
+  }
+  .page-content {
+    overflow: visible !important;
+    height: auto !important;
+  }
+  .main-header {
+    position: sticky;
+    top: 0;
+    z-index: 150;
+  }
   /* Sidebar: slide-in drawer */
   .sidebar {
     position: fixed;
